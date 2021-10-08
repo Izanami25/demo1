@@ -1,17 +1,19 @@
 package main
 
 import (
+	"alexedwards.net/snippetbox/pkg/forms" // New import
 	"alexedwards.net/snippetbox/pkg/models"
 	"html/template"
-	"net/url"
 	"path/filepath"
 	"time"
 )
 
+// Update the templateData fields, removing the individual FormData and
+// FormErrors fields and replacing them with a single Form field.
 type templateData struct {
 	CurrentYear int
-	FormData    url.Values
-	FormErrors  map[string]string
+	Flash       string
+	Form        *forms.Form
 	Snippet     *models.Snippet
 	Snippets    []*models.Snippet
 }
