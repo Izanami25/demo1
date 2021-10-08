@@ -3,15 +3,17 @@ package main
 import (
 	"alexedwards.net/snippetbox/pkg/models"
 	"html/template"
+	"net/url"
 	"path/filepath"
 	"time"
 )
 
-
 type templateData struct {
 	CurrentYear int
-	Snippet *models.Snippet
-	Snippets []*models.Snippet
+	FormData    url.Values
+	FormErrors  map[string]string
+	Snippet     *models.Snippet
+	Snippets    []*models.Snippet
 }
 
 // Create a humanDate function which returns a nicely formatted string
@@ -19,6 +21,7 @@ type templateData struct {
 func humanDate(t time.Time) string {
 	return t.Format("02 Jan 2006 at 15:04")
 }
+
 // Initialize a template.FuncMap object and store it in a global variable. This is
 // essentially a string-keyed map which acts as a lookup between the names of our
 // custom template functions and the functions themselves.
@@ -54,4 +57,3 @@ func newTemplateCache(dir string) (map[string]*template.Template, error) {
 	}
 	return cache, nil
 }
-
